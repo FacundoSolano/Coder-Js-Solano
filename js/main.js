@@ -10,43 +10,13 @@ let tipoDolar;
 
 let tipoEuro;
 
-while (true) {
-    cueva = prompt('¿Desea comprar o vender divisas?').toLowerCase();
+let tipoCambio;
 
-    if (cueva == 'compra' || cueva == 'comprar') {
-        while (true) {
-            compra = prompt('¿Qué tipo de moneda desea comprar? \n- Dolar \n- Euro').toLowerCase();
+let cambioElegido;
 
-            if (compra == 'dolar' || compra == 'euro') {
-                break;
-            }
+let stringObjetos
 
-            else {
-                alert('Elija una opción posible');
-            }
-        }
-        break;
-    }
-
-    else if (cueva == 'venta' || cueva == 'vender') {
-        while (true) {
-            venta = prompt('¿Qué tipo de moneda desea vender? \n- Dolar \n- Euro').toLowerCase();
-
-            if (venta == 'dolar' || venta == 'euro') {
-                break;
-            }
-
-            else {
-                alert('Elija una opción posible');
-            }
-        }
-        break;
-    }
-
-    else {
-        alert('Elija una opción posible');
-    }
-}
+let consulta = prompt('¿Desea consultar precios o intercambiar divisas?')
 
 let dolar = [];
 
@@ -73,6 +43,79 @@ const euro = {
     paraleloVenta: 1359,
     paraleloCompra: 1326
 }
+
+if (consulta == 'consultar' || consulta == 'consultar precios') {
+    while (true) {
+        consulta = prompt('Desea consultar por Dolares o por Euros?').toLowerCase();
+
+        if (consulta == 'dolares' || consulta == 'dolar') {
+            tipoCambio = parseInt(prompt("¿qué tipo de dolar queria consultar? \n0- Oficial  \n1- Blue \n2- MEP"));
+
+            cambioElegido = dolar.find(obj => obj.id === tipoCambio);
+
+            if (!isNaN(tipoCambio) && tipoCambio >= 0 && tipoCambio < dolar.length) {
+                stringObjetos = JSON.stringify(dolar[tipoCambio]);
+
+                stringObjetos = stringObjetos.slice(1, -1);
+
+                alert(stringObjetos);
+            }
+
+            else {
+                alert('Elija un número válido');
+            }
+        }
+
+        else if (consulta == 'euros' || consulta == 'euro') {
+            alert('no papi, el euro cambia mucho')
+        }
+
+        else {
+            alert('Elija una opción posible');
+        }
+    }
+}
+
+else if (consulta == 'intercambiar' || consulta == 'intercambiar divisas') {
+    while (true) {
+        cueva = prompt('¿Desea comprar o vender divisas?').toLowerCase();
+
+        if (cueva == 'compra' || cueva == 'comprar') {
+            while (true) {
+                compra = prompt('¿Qué tipo de moneda desea comprar? \n- Dolar \n- Euro').toLowerCase();
+
+                if (compra == 'dolar' || compra == 'euro') {
+                    break;
+                }
+
+                else {
+                    alert('Elija una opción posible');
+                }
+            }
+            break;
+        }
+
+        else if (cueva == 'venta' || cueva == 'vender') {
+            while (true) {
+                venta = prompt('¿Qué tipo de moneda desea vender? \n- Dolar \n- Euro').toLowerCase();
+
+                if (venta == 'dolar' || venta == 'euro') {
+                    break;
+                }
+
+                else {
+                    alert('Elija una opción posible');
+                }
+            }
+            break;
+        }
+
+        else {
+            alert('Elija una opción posible');
+        }
+    }
+}
+
 
 if (cueva == 'compra' || cueva == 'comprar') {
     if (compra == 'dolar') {
@@ -133,56 +176,57 @@ else if (cueva == 'venta' || cueva == 'vender') {
 }
 
 
+if (consulta == 'intercambiar' || consulta == 'intercambiar divisas') {
+    while (true) {
+        monto = Number(prompt('Por favor, ingrese su monto a convertir'));
 
-while (true) {
-    monto = Number(prompt('Por favor, ingrese su monto a convertir'));
+        if (isNaN(monto)) {
+            alert('Por favor, ingrese un número')
+        }
 
-    if (isNaN(monto)) {
-        alert('Por favor, ingrese un número')
+        else {
+            break
+        }
     }
-
-    else {
-        break
-    }
 }
 
-if (cueva == 'compra' || cueva == 'comprar' && tipoDolar == 'oficial') {
-    alert('Usted puede comprar U$D' + (monto / oficial.venta) + 'al cambio oficial');
+if ((cueva == 'compra' || cueva == 'comprar') && tipoDolar == 'oficial') {
+    alert('Usted puede comprar U$D' + (monto / oficial.venta).toFixed(2) + 'al cambio oficial');
 }
 
-else if (cueva == 'compra' || cueva == 'comprar' && tipoDolar == 'blue') {
-    alert('Usted puede comprar U$D' + (monto / blue.venta) + 'blue');
+else if ((cueva == 'compra' || cueva == 'comprar') && tipoDolar == 'blue') {
+    alert('Usted puede comprar U$D' + (monto / blue.venta).toFixed(2) + 'blue');
 }
 
-else if (cueva == 'compra' || cueva == 'comprar' && tipoDolar == 'mep') {
-    alert('Usted puede comprar U$D' + (monto / mep.venta) + 'MEP');
+else if ((cueva == 'compra' || cueva == 'comprar') && tipoDolar == 'mep') {
+    alert('Usted puede comprar U$D' + (monto / mep.venta).toFixed(2) + 'MEP');
 }
 
-if (cueva == 'venta' || cueva == 'vender' && tipoDolar == 'oficial') {
-    alert('Usted puede comprar $' + (monto * oficial.compra) + ' pesos');
+if ((cueva == 'venta' || cueva == 'vender') && tipoDolar == 'oficial') {
+    alert('Usted puede comprar $' + (monto * oficial.compra).toFixed(2) + ' pesos');
 }
 
-else if (cueva == 'venta' || cueva == 'vender' && tipoDolar == 'blue') {
-    alert('Usted puede comprar $' + (monto * blue.compra) + ' pesos');
+else if ((cueva == 'venta' || cueva == 'vender') && tipoDolar == 'blue') {
+    alert('Usted puede comprar $' + (monto * blue.compra).toFixed(2) + ' pesos');
 }
 
-else if (cueva == 'venta' || cueva == 'vender' && tipoDolar == 'mep') {
-    alert('Usted puede comprar $' + (monto * mep.compra) + ' pesos');
+else if ((cueva == 'venta' || cueva == 'vender') && tipoDolar == 'mep') {
+    alert('Usted puede comprar $' + (monto * mep.compra).toFixed(2) + ' pesos');
 }
 
 
-if (cueva == 'compra' || cueva == 'comprar' && tipoEuro == 'oficial') {
-    alert('Usted puede comprar €' + (monto / euro.oficialVenta) + 'al cambio oficial');
+if ((cueva == 'compra' || cueva == 'comprar') && tipoEuro == 'oficial') {
+    alert('Usted puede comprar €' + (monto / euro.oficialVenta).toFixed(2) + 'al cambio oficial');
 }
 
-else if (cueva == 'compra' || cueva == 'comprar' && tipoEuro == 'paralelo') {
-    alert('Usted puede comprar €' + (monto / euro.paraleloVenta) + 'al paralelo');
+else if ((cueva == 'compra' || cueva == 'comprar') && tipoEuro == 'paralelo') {
+    alert('Usted puede comprar €' + (monto / euro.paraleloVenta).toFixed(2) + 'al paralelo');
 }
 
-if (cueva == 'venta' || cueva == 'vender' && tipoEuro == 'oficial') {
-    alert('Usted puede comprar $' + (monto * euro.oficialVenta) + 'pesos');
+if ((cueva == 'venta' || cueva == 'vender') && tipoEuro == 'oficial') {
+    alert('Usted puede comprar $' + (monto * euro.oficialVenta).toFixed(2) + 'pesos');
 }
 
-else if (cueva == 'compra' || cueva == 'comprar' && tipoEuro == 'paralelo') {
-    alert('Usted puede comprar $' + (monto * euro.paraleloVenta) + 'pesos');
+else if ((cueva == 'compra' || cueva == 'comprar') && tipoEuro == 'paralelo') {
+    alert('Usted puede comprar $' + (monto * euro.paraleloVenta).toFixed(2) + 'pesos');
 }
