@@ -20,6 +20,12 @@ let consulta = prompt('¿Desea consultar precios o intercambiar divisas?')
 
 let dolar = [];
 
+let dolares = document.createElement("h2");
+
+dolares.innerText = "Dolarucos!!!";
+
+document.body.appendChild(dolares);
+
 const oficial = {
     venta: 918,
     compra: 878
